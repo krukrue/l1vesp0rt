@@ -1,5 +1,5 @@
-import { TopSearch } from "./_components/top-search";
+import { Search } from "./_components/search";
 
 export default function Home() {
-  return <TopSearch />;
+  return <Search />;
 }

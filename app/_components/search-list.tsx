@@ -14,7 +14,7 @@ import { useSearchInput } from "../_hooks/use-search-input";
 import { SearchGrid } from "./search-content/search-grid/search-grid";
 import { SearchTypeFilterKey, SEARCH_TYPE_FILTER } from "@/lib/api/search/common";
 
-export function TopSearchList() {
+export function SearchList() {
 
   const [typeFilter, setTypeFilter] = useState<SearchTypeFilterKey>("ALL");
   const { searchValue, isDebouncing, onDebouncingChange, onDebouncedChange } = useSearchInput();
