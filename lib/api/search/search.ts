@@ -24,7 +24,7 @@ export function buildSearchUrl(params: SearchParams): string {
     projectTypeId,
     sportIds,
     typeIds,
-    limit,
+    limit
   });
   searchParams.set("q", q);
 

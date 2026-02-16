@@ -3,6 +3,7 @@
 import { getImageUrl } from "@/lib/api/search/top-search";
 import { DefaultImage } from "@/components/default-image/default-image";
 import type { SearchItem } from "@/lib/api/types";
+import Link from "next/link";
 
 interface SearchEntityProps {
   item: SearchItem;
@@ -20,7 +21,7 @@ export function SearchEntity({ item }: SearchEntityProps) {
   const href = buildUrlWithId(item.url, item.id);
 
   return (
-    <a
+    <Link
       href={href}
       rel="noopener noreferrer"
       className="flex w-full items-center gap-3 rounded-lg border p-3 text-left hover:bg-gray-50"
@@ -36,7 +37,7 @@ export function SearchEntity({ item }: SearchEntityProps) {
       <span className="text-sm text-gray-500">
         {item.type.name} · {item.sport.name}
       </span>
-    </a>
+    </Link>
   );
 }
 
