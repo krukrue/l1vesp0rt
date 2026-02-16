@@ -1,6 +1,5 @@
 "use client";
 
-import { SearchEntity } from "@/components/search-entity/search-entity";
 import { useSearchList } from "../_hooks/use-search-list";
 import { SearchInput } from "@/components/search-input/search-input";
 import { useState } from "react";

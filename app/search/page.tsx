@@ -1,9 +1,9 @@
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { fetchTopSearch } from "@/lib/api/search/top-search";
-import { SearchList } from "./search-list";
+import { SearchList } from "./_components/search-list";
 import { searchQueries } from "@/lib/queries/search/search";
 
-export async function Search() {
+export default async function Search() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({

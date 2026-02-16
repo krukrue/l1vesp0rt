@@ -1,5 +1,5 @@
-import { Search } from "./_components/search";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <Search />;
+  redirect("/search");
 }
