@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# L1veSp0rt
 
-## Getting Started
-
-First, run the development server:
+## Spuštění
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Popis projektu:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Aplikace splňuje všechny podmínky zadaného úkolu. Pro svůj projekt jsem zvolil jako základ NextJS, protože se domnívám, že SSR má své místo v některých částech aplikace, které nijak nesouvisí s okamžitým získáním výsledků a mám rád AppRouter :), proto pro stránku spouštíme prefetch nejlepších výsledků (přidal jsem to sám pro konzistenci) a poskytujeme uživateli HTML stránku. Caching je také vhodny při vyhledávání, protože ani zde nejsou data, která by vyžadovala okamžitou aktualizaci. 
 
-## Learn More
+Ve vyhledávání je samozřejmě použít debounce, který neumožňuje klientovi odesílat zbytečné požadavky. K tomu jsem si jednoduše stáhl hook, který tento problém řeší za mě. Jako loading stav byl také vybrán skeleton, vyvedl jsem to do samostatné komponenty a staticky zobrazuji 10 prvků při state in debouncting. 
 
-To learn more about Next.js, take a look at the following resources:
+Komponenta Detail byla implementována tak, že data získáváme pomocí React Query, jako klíč se použije název týmu/hráče, protože předpokládáme pozitivní scénář, kdy vyhledávání vždy najde požadovanou hodnotu (V našem úkolu nemáme API pro získání týmu, kdybychom ho měli, udělal bych to jednoduše na SSR bez cache, protože právě v takových datech mohou být ty samé výsledky a okamžité změny, ale to vše musí říct business – moje práce je pouze předpokládat). 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Query jsem implementoval pomocí objektu, který obsahuje konstanty a funkce, což nám umožňuje znovu použít klíč v jakémkoli bodě aplikace a provést invalidaci. 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Snažil jsem se logiku skládat do vlastních hooků, ale bez fanatismu, protože v komponentách s 50 řádky to nemá smysl. Překlady jsem nijak neřešil, zdá se mi to příliš banální pro testovací úkol. V celém projektu jsem se snažil nepoužívat BarelImports. Navíc jsem přidal nějaké testy co taky by měli splňovat tohle zadání.
 
-## Deploy on Vercel
+Taky stojí za to zmínit, že tlačítko search v aplikaci není, podle mě v debouced inputSearch je jiná logika
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Aplikace poběží na [http://localhost:3000](http://localhost:3000).
+
+## Příkazy
+
+| Příkaz | Popis |
+|--------|------|
+| `npm run dev` | Spustí vývojový server |
+| `npm test` | Spustí unit testy |
+
+## Konfigurace
+
+Pro práci s API je potřeba nastavit proměnné prostředí v souboru `.env`: (Z ukolu)
+
+- `NEXT_PUBLIC_API_BASE` — základní URL API (search, top-search endpointy)
+- `NEXT_PUBLIC_IMAGE_BASE` — základní URL pro obrázky
+
+## Funkce
+
+- **Vyhledávání** — debounced vyhledávání sportovních entit s filtrováním podle typu (Vše, Soutěže, Účastníci)
+- **Top výsledky** — zobrazení populárních výsledků při prvním načtení
+- **Detail** — stránka s detailem entity (tým, soutěž)
+- **Skeleton loading** — animované placeholdery během načítání
+
+## Technologie
+
+- **Next.js 16**
+- **React 19**
+- **TanStack Query** — správa cache a SSR
+- **Tailwind CSS**
+- **TypeScript**
+- **Jest + React Testing Library** — testování
+
+## Struktura projektu
+
+```
+app/
+  search/          # Stránka vyhledávání
+  detail/          # Stránka detailu entity
+lib/
+  api/             # API klient a typy
+components/        # Sdílené komponenty
+```
