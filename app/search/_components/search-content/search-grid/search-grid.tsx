@@ -1,36 +1,15 @@
 import { SearchItem } from "@/lib/api/types";
 import { SearchEntity } from "@/components/search-entity/search-entity";
+import { groupBySport } from "./utils/utils";
+import { buildDetailRoute } from "@/routes";
 
 interface SearchGridProps {
   data: SearchItem[];
 }
 
-interface SportGroup {
-  sport: { id: number; name: string };
-  items: SearchItem[];
-}
-
-function groupBySport(data: SearchItem[]): SportGroup[] {
-  const groups = new Map<number, SportGroup>();
-
-  for (const item of data) {
-    const existing = groups.get(item.sport.id);
-    if (existing) {
-      existing.items.push(item);
-    } else {
-      groups.set(item.sport.id, {
-        sport: item.sport,
-        items: [item],
-      });
-    }
-  }
-
-  return Array.from(groups.values()).sort((a, b) => b.items.length - a.items.length);
-}
-
 export function SearchGrid({ data }: SearchGridProps) {
+  // Function is lightweight and can be tested separately
   const sportGroups = groupBySport(data);
-
   return (
     <div className="flex flex-col gap-4">
       {sportGroups.map(({ sport, items }) => (
@@ -41,7 +20,7 @@ export function SearchGrid({ data }: SearchGridProps) {
           <ul className="flex flex-col gap-2 pl-4">
             {items.map((item) => (
               <li key={item.id}>
-                <SearchEntity item={item} />
+                <SearchEntity item={item} href={buildDetailRoute(item.url, item.id)}/>
               </li>
             ))}
           </ul>

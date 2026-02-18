@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchList } from "../_hooks/use-search-list";
+import { useSearchDataList } from "../_hooks/use-search-list";
 import { SearchInput } from "@/components/search-input/search-input";
 import { useState } from "react";
 import { SkeletonSearch } from "./search-content/skeleton/skeleton-search";
@@ -16,7 +16,7 @@ export function SearchList() {
   const [typeFilter, setTypeFilter] = useState<SearchTypeFilterKey>("ALL");
   const { searchValue, isDebouncing, onDebouncingChange, onDebouncedChange } =
     useSearchInput();
-  const { data: topSearch, error, refetch } = useSearchList(
+  const { data: topSearch, error, refetch } = useSearchDataList(
     searchValue,
     typeFilter
   );

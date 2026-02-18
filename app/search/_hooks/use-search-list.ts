@@ -9,7 +9,7 @@ import { fetchTopSearch } from "@/lib/api/search/top-search";
 import { searchQueries } from "@/lib/queries/search/search";
 import { useQuery } from "@tanstack/react-query";
 
-export function useSearchList(qValue: string, typeFilter: SearchTypeFilterKey) {
+export function useSearchDataList(qValue: string, typeFilter: SearchTypeFilterKey) {
   const isSearchMode = qValue.length > 1;
 
   const topSearchQuery = useQuery({

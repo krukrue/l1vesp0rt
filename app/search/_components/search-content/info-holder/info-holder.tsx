@@ -1,4 +1,4 @@
-import { MIN_SEARCH_LENGTH } from "@/lib/search/consts";
+import { MIN_SEARCH_LENGTH } from "@/lib/consts/search";
 
 interface InfoHolderProps {
   searchLength: number;
