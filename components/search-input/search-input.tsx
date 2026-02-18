@@ -29,11 +29,13 @@ export function SearchInput({
 
   useEffect(() => {
     onDebouncedChange(value);
-  }, [value, onDebouncedChange]);
+    onDebouncingChange?.(false);
+  }, [value, onDebouncedChange, onDebouncingChange]);
 
-  useEffect(() => {
-    onDebouncingChange?.(text !== value);
-  }, [text, value, onDebouncingChange]);
+  function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setText(e.target.value);
+    onDebouncingChange?.(true);
+  }
 
   return (
     <div className="relative">
@@ -44,7 +46,7 @@ export function SearchInput({
       <input
         type="search"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={onInputChange}
         placeholder="Search..."
         className={cn(`w-full rounded-lg border border-gray-300 py-2 pl-10 pr-3
            outline-none transition-colors placeholder:text-gray-400 focus:border-gray-500 focus:ring-1 focus:ring-gray-500`, 
