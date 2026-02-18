@@ -15,7 +15,7 @@ export function ParticipantDetail({ entity }: ParticipantDetailProps) {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-blue-200 bg-linear-to-br from-blue-50 to-indigo-50 shadow-sm">
-      <div className="flex flex-col items-center gap-6 p-8 sm:flex-row sm:items-start">
+      <div className="flex flex-col items-center gap-6 p-8 ">
         <div className="shrink-0">
           <DefaultImage
             src={imageSrc}
@@ -26,11 +26,11 @@ export function ParticipantDetail({ entity }: ParticipantDetailProps) {
           />
         </div>
 
-        <div className="flex-1 text-center sm:text-left">
+        <div className="flex-1 text-center ">
           <span className="mb-2 inline-block rounded-full bg-blue-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-800">
             {isTeamEntity ? "Team" : "Player"}
           </span>
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-gray-900">
             {entity.name}
           </h1>
 

@@ -28,10 +28,14 @@ export function SearchInput({
   const [text, setText] = useState("");
   const [value] = useDebounce(text, debounceMs);
 
+  // I don't like useEffects but in small components it doesn't matter and also seems quite good
   useComponentDidMount(() => {
     onDebouncedChange(value);
-    onDebouncingChange?.(false);
-  }, [value, onDebouncedChange, onDebouncingChange]);
+  }, [value, onDebouncedChange]);
+
+  useComponentDidMount(() => {
+    onDebouncingChange?.(text !== value);
+  }, [text, value, onDebouncingChange]);
 
   function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setText(e.target.value);
