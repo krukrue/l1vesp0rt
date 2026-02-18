@@ -7,18 +7,12 @@ import Link from "next/link";
 
 interface SearchEntityProps {
   item: SearchItem;
+  href: string;
 }
 
-function buildUrlWithId(url: string, id: string): string {
-  const separator = url.includes("?") ? "&" : "?";
-  return `/detail/${url}${separator}id=${id}`;
-}
-
-export function SearchEntity({ item }: SearchEntityProps) {
+export function SearchEntity({ item, href }: SearchEntityProps) {
   const imagePath = item.images[0]?.path;
-  const url = imagePath ? getImageUrl(imagePath) : "/image-placeholder.svg" ;
-  
-  const href = buildUrlWithId(item.url, item.id);
+  const url = imagePath ? getImageUrl(imagePath) : "/image-placeholder.svg" ;  
 
   return (
     <Link

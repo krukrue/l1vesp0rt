@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useComponentDidMount } from "@/lib/hooks/use-component-did-mount";
+import { useState } from "react";
 import { HiSearch } from "react-icons/hi";
 import { useDebounce } from "use-debounce";
 
@@ -27,7 +28,7 @@ export function SearchInput({
   const [text, setText] = useState("");
   const [value] = useDebounce(text, debounceMs);
 
-  useEffect(() => {
+  useComponentDidMount(() => {
     onDebouncedChange(value);
     onDebouncingChange?.(false);
   }, [value, onDebouncedChange, onDebouncingChange]);
@@ -38,7 +39,7 @@ export function SearchInput({
   }
 
   return (
-    <div className="relative">
+    <div className={cn("relative", className)}>
       <HiSearch
         className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-gray-400"
         aria-hidden
@@ -49,8 +50,7 @@ export function SearchInput({
         onChange={onInputChange}
         placeholder="Search..."
         className={cn(`w-full rounded-lg border border-gray-300 py-2 pl-10 pr-3
-           outline-none transition-colors placeholder:text-gray-400 focus:border-gray-500 focus:ring-1 focus:ring-gray-500`, 
-           className)}
+           outline-none transition-colors placeholder:text-gray-400 focus:border-gray-500 focus:ring-1 focus:ring-gray-500`)}
         aria-label="Search"
         {...props}
       />
