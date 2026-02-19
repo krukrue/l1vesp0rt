@@ -1,4 +1,4 @@
-import type { SearchItem } from "../types";
+import { SearchItem } from "@/lib/types/search/search";
 import {
   buildBaseSearchParams,
   DEFAULT_BASE_PARAMS,

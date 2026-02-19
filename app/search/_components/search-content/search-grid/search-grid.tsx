@@ -1,7 +1,7 @@
-import { SearchItem } from "@/lib/api/types";
 import { SearchEntity } from "@/components/search-entity/search-entity";
 import { groupBySport } from "./utils/utils";
 import { buildDetailRoute } from "@/routes";
+import { SearchItem } from "@/lib/types/search/search";
 
 interface SearchGridProps {
   data: SearchItem[];

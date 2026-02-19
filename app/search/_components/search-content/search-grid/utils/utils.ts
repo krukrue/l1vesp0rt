@@ -1,4 +1,4 @@
-import { SearchItem } from "@/lib/api/types";
+import { SearchItem } from "@/lib/types";
 
 interface SportGroup {
   sport: { id: number; name: string };

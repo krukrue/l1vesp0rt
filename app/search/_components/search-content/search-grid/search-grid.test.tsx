@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { SearchGrid } from "./search-grid";
-import type { SearchItem } from "@/lib/api/types";
 import { groupBySport } from "./utils/utils";
+import { SearchItem } from "@/lib/types/search/search";
 
 const TOTTENHAM_HOTSPUR_NAME = "Tottenham Hotspur";
 const TOTTENHAM_HOTSPUR_ID = "tottenham-hotspur";

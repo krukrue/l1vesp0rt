@@ -2,8 +2,8 @@
 
 import { getImageUrl } from "@/lib/api/search/top-search";
 import { DefaultImage } from "@/components/default-image/default-image";
-import type { SearchItem } from "@/lib/api/types";
 import Link from "next/link";
+import { SearchItem } from "@/lib/types/search/search";
 
 interface SearchEntityProps {
   item: SearchItem;
